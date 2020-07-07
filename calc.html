@@ -1,0 +1,49 @@
+<html>
+	<head>
+		<title>Calc</title>
+		<style>
+			.pressed {
+				background-color: #FF9999;
+			}
+		</style>
+		<script>
+			function plus() {
+				var x;
+				x = document.getElementById("x").value;
+				var y = document.getElementById("y").value;
+				var z = parseFloat(x) + parseFloat(y);
+				var item = x + "+" + y + "=" + z;
+				document.getElementById("result").value = z;
+				document.getElementById("plusButton").className = "pressed";			
+				document.getElementById("minusButton").className = "";
+				document.getElementById("history").innerHTML = 
+						document.getElementById("history").innerHTML + "<br />" + item;
+					
+			}
+			function minus() {
+				var x;
+				x = document.getElementById("x").value;
+				var y = document.getElementById("y").value;
+				var z = parseFloat(x) - parseFloat(y);
+				var item = x + "-" + y + "=" + z;
+
+				document.getElementById("result").value = z;
+				document.getElementById("plusButton").className = "";			
+				document.getElementById("minusButton").className = "pressed";			
+				document.getElementById("history").innerHTML = 
+						document.getElementById("history").innerHTML + "<br />" + item;
+
+
+			}
+		</script>
+	</head>
+	<body>
+		<h1>Calc</h1>
+		<input type="text" id="x"/> <br />
+		<input type="text" id="y"/> <br />
+		<input type="submit" value="+" id="plusButton" onclick="plus()"; />
+		<input type="submit" value="-" id="minusButton" onclick="minus()"; /> <br />
+		<input type="text" id="result"/>
+		<div id="history"></div>
+	</body>
+</html>

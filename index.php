@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Calculate</title>
+</head>
+<body>
+
+	<h1>Calculate on server</h1>
+	<input type="text" id="x"/> <br />
+	<input type="text" id="y"/> <br />
+	<input type="submit" value="+" id="plusButton" onclick="plus()"; />
+	<input type="submit" value="-" id="minusButton" onclick="minus()"; /> 
+	<input type="submit" value="*" id="multiplyButton" onclick="multiply()"; />
+	<input type="submit" value="/" id="divideButton" onclick="divide()"; /> <br />
+	<input type="text" id="result"/>
+	<div id="history"></div>
+
+	<script type="text/javascript">
+
+
+//*********************************************************
+
+		function post_request(x,y,o,it) {
+
+			let op_x = x;
+			let op_y = y;
+			let operator = o;
+			let result = '0';
+
+
+			const request = new XMLHttpRequest();
+
+			const url = "calc.php?op_x=" + op_x + "&op_y=" + op_y + "&operator=" + operator + "&result=" + result;
+
+			request.open('GET', url);
+			request.setRequestHeader("Content-Type", "application/x-www-form-url");
+
+			request.addEventListener("readystatechange", () => {
+				if (request.readyState === 4 && request.status === 200) {
+					let obj = request.response;
+					document.getElementById("result").value = obj;
+					document.getElementById("history").innerHTML = 
+						document.getElementById("history").innerHTML + "<br />" + it + obj;
+
+					console.log(obj);
+				}
+			} )
+
+
+			request.send();
+			request.responseText;
+
+
+		}
+//*********************************************************
+
+
+
+		function plus() {
+			var x;
+			x = document.getElementById("x").value;
+			var y = document.getElementById("y").value;
+			// var z = parseFloat(x) + parseFloat(y);
+			var item = x + "+" + y + "=";
+			post_request(x,y,'plus',item);
+			document.getElementById("plusButton").className = "pressed";			
+			document.getElementById("minusButton").className = "";
+			document.getElementById("multiplyButton").className = "";
+			document.getElementById("divideButton").className = "";	
+		}
+		function minus() {
+			var x;
+			x = document.getElementById("x").value;
+			var y = document.getElementById("y").value;
+//			var z = parseFloat(x) - parseFloat(y);
+			var item = x + "-" + y + "=" ;
+			post_request(x,y,'minus',item);
+			document.getElementById("plusButton").className = "";			
+			document.getElementById("minusButton").className = "pressed";			
+			document.getElementById("multiplyButton").className = "";
+			document.getElementById("divideButton").className = "";	
+		}
+		function multiply() {
+			var x;
+			x = document.getElementById("x").value;
+			var y = document.getElementById("y").value;
+//			var z = parseFloat(x) - parseFloat(y);
+			var item = x + "*" + y + "=" ;
+			post_request(x,y,'multiply',item);
+			document.getElementById("plusButton").className = "";			
+			document.getElementById("minusButton").className = "";
+			document.getElementById("multiplyButton").className = "pressed";	
+			document.getElementById("divideButton").className = "";	
+		}
+		function divide() {
+			var x;
+			x = document.getElementById("x").value;
+			var y = document.getElementById("y").value;
+//			var z = parseFloat(x) - parseFloat(y);
+			var item = x + "/" + y + "=" ;
+			post_request(x,y,'divide',item);
+			document.getElementById("plusButton").className = "";			
+			document.getElementById("minusButton").className = "";
+			document.getElementById("multiplyButton").className = "";
+			document.getElementById("divideButton").className = "pressed";	
+		}
+	</script>
+</body>
+</html>
