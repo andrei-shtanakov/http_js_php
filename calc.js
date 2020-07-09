@@ -1,4 +1,24 @@
-		function post_request(x,y,o,it) {
+		function getXmlHttp() {
+			let xmlhttp;
+			try {
+				xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
+			} catch (e) {
+				try {
+					xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+				} catch (E) {
+					xmlhttp = false;
+				}
+			}
+			if (!xmlhttp && typeof XMLHttpRequest!='undefined') {
+				xmlhttp = new XMLHttpRequest();
+			}
+			return xmlhttp;
+		}
+
+
+
+
+		function get_request(x,y,o,it) {
 
 			let op_x = x;
 			let op_y = y;
@@ -6,7 +26,11 @@
 			let result = '0';
 
 
-			const request = new XMLHttpRequest();
+
+
+
+			// const request = new XMLHttpRequest();
+			const request = new getXmlHttp();
 
 			const url = "calc.php?op_x=" + op_x + "&op_y=" + op_y + "&operator=" + operator + "&result=" + result;
 
@@ -71,7 +95,7 @@
 			var y = document.getElementById("y").value;
 			// var z = parseFloat(x) + parseFloat(y);
 			var item = x + "+" + y + "=";
-			post_request(x,y,'plus',item);
+			get_request(x,y,'plus',item);
 			document.getElementById("plusButton").className = "pressed";			
 			document.getElementById("minusButton").className = "";
 			document.getElementById("multiplyButton").className = "";
@@ -83,7 +107,7 @@
 			var y = document.getElementById("y").value;
 //			var z = parseFloat(x) - parseFloat(y);
 			var item = x + "-" + y + "=" ;
-			post_request(x,y,'minus',item);
+			get_request(x,y,'minus',item);
 			document.getElementById("plusButton").className = "";			
 			document.getElementById("minusButton").className = "pressed";			
 			document.getElementById("multiplyButton").className = "";
