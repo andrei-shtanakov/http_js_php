@@ -24,6 +24,18 @@
 	else {
 		echo("Bad operator");
 	}
+
+
+	$connection = new mysqli("localhost", "root", "", "calc");
+	mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+
+	$sql = "INSERT INTO operations(op_x, op_y, operator,  result)
+	        VALUES($op_x, $op_y, '$operator', $result) "; 
+	$connection->query($sql);
+
+
+
+
 //	echo $op_x;
 	echo $result
 //	echo "<document.getElementById("result").value = result;>"

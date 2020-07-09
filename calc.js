@@ -17,8 +17,39 @@
 				if (request.readyState === 4 && request.status === 200) {
 					let obj = request.response;
 					document.getElementById("result").value = obj;
-					document.getElementById("history").innerHTML = 
-						document.getElementById("history").innerHTML + "<br />" + it + obj;
+					// document.getElementById("history").innerHTML = 
+					// 	document.getElementById("history").innerHTML + "<br />" + it + obj;
+
+					console.log(obj);
+				}
+			} )
+
+
+			request.send();
+			request.responseText;
+
+			history_request(10);
+
+
+		}
+//*********************************************************
+
+		function history_request(max_count) {
+
+
+			const request = new XMLHttpRequest();
+
+			const url = "work_db.php?max_count=" + max_count;
+
+			request.open('GET', url);
+			request.setRequestHeader("Content-Type", "application/x-www-form-url");
+
+			request.addEventListener("readystatechange", () => {
+				if (request.readyState === 4 && request.status === 200) {
+					let obj = request.response;
+					document.getElementById("history").innerHTML = obj;
+					// document.getElementById("history").innerHTML = 
+					// 	document.getElementById("history").innerHTML + "<br />" + it + obj;
 
 					console.log(obj);
 				}
@@ -29,9 +60,9 @@
 			request.responseText;
 
 
+
 		}
 //*********************************************************
-
 
 
 		function plus() {
