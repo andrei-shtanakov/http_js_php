@@ -58,6 +58,45 @@
 		}
 //*********************************************************
 
+		function post_request(x,y,o,it) {
+
+			// const request = new XMLHttpRequest();
+			var request = new XMLHttpRequest();
+			var params = "op_x=" + x + "&op_y=" + y + "&operator=" + o;
+
+// ******************************************
+			request.onreadystatechange = function() {
+				if(request.readyState == 4 && request.status === 200) {
+					let obj = request.response;
+					document.getElementById("result").value = obj;
+
+					console.log(obj);
+
+					// if(request.responseText == '1'){
+					// 	document.querySelector('#result').innerHTML = 'Форма заполнена';
+					// 	document.querySelector('form').style.display = 'none';
+					// }
+					// else{
+					// 	document.querySelector('#result').innerHTML = request.responseText;
+					// }
+				}
+			}
+
+
+			request.open('POST', 'calc.php');
+			request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+			request.send(params);
+
+// ******************************************
+
+			history_request(10);
+
+		}
+//*********************************************************
+
+
+
 		function history_request(max_count) {
 
 
@@ -95,7 +134,7 @@
 			var y = document.getElementById("y").value;
 			// var z = parseFloat(x) + parseFloat(y);
 			var item = x + "+" + y + "=";
-			get_request(x,y,'plus',item);
+			post_request(x,y,'plus',item);
 			document.getElementById("plusButton").className = "pressed";			
 			document.getElementById("minusButton").className = "";
 			document.getElementById("multiplyButton").className = "";
@@ -107,7 +146,7 @@
 			var y = document.getElementById("y").value;
 //			var z = parseFloat(x) - parseFloat(y);
 			var item = x + "-" + y + "=" ;
-			get_request(x,y,'minus',item);
+			post_request(x,y,'minus',item);
 			document.getElementById("plusButton").className = "";			
 			document.getElementById("minusButton").className = "pressed";			
 			document.getElementById("multiplyButton").className = "";

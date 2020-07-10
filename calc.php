@@ -1,10 +1,16 @@
 <?php
-	$op_x = !empty($_REQUEST['op_x']) ? $_REQUEST['op_x'] : 0;
+/*	$op_x = !empty($_REQUEST['op_x']) ? $_REQUEST['op_x'] : 0;
 	$op_y = !empty($_REQUEST['op_y']) ? $_REQUEST['op_y'] : 0;
 	$operator = !empty($_REQUEST['operator']) ? $_REQUEST['operator'] : "";
 	$result = 0;
-	// $op_x = $_REQUEST["op_x"];
+*/	// $op_x = $_REQUEST["op_x"];
 	// $op_y = $_REQUEST["op_y"];
+
+	$op_x = !empty($_POST['op_x']) ? $_POST['op_x'] : 0;
+	$op_y = !empty($_POST['op_y']) ? $_POST['op_y'] : 0;
+	$operator = !empty($_POST['operator']) ? $_POST['operator'] : "";
+	$result = 0;
+
 	if ($operator == 'plus') {
 		$result = $op_x + $op_y;
 		// echo($op_x." + ".$op_y." = ".$result);
