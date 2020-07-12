@@ -58,8 +58,8 @@
 		}
 //*********************************************************
 
-		function post_request(x,y,o,it) {
-
+		function post_request(x,y,o,it, callback) {
+			var f = callback || function(data){};
 			// const request = new XMLHttpRequest();
 			var request = new XMLHttpRequest();
 			var params = "op_x=" + x + "&op_y=" + y + "&operator=" + o;
@@ -67,7 +67,10 @@
 // ******************************************
 			request.onreadystatechange = function() {
 				if(request.readyState == 4 && request.status === 200) {
+
 					let obj = request.response;
+					f(obj);
+
 					document.getElementById("result").value = obj;
 
 					console.log(obj);
@@ -134,7 +137,9 @@
 			var y = document.getElementById("y").value;
 			// var z = parseFloat(x) + parseFloat(y);
 			var item = x + "+" + y + "=";
-			post_request(x,y,'plus',item);
+			post_request(x,y,'plus',item, function(data){
+				document.getElementById("result").value = data;
+			});
 			document.getElementById("plusButton").className = "pressed";			
 			document.getElementById("minusButton").className = "";
 			document.getElementById("multiplyButton").className = "";
@@ -146,7 +151,9 @@
 			var y = document.getElementById("y").value;
 //			var z = parseFloat(x) - parseFloat(y);
 			var item = x + "-" + y + "=" ;
-			post_request(x,y,'minus',item);
+			post_request(x,y,'minus',item, function(data){
+				document.getElementById("result").value = data;
+			});
 			document.getElementById("plusButton").className = "";			
 			document.getElementById("minusButton").className = "pressed";			
 			document.getElementById("multiplyButton").className = "";
@@ -158,7 +165,9 @@
 			var y = document.getElementById("y").value;
 //			var z = parseFloat(x) - parseFloat(y);
 			var item = x + "*" + y + "=" ;
-			post_request(x,y,'multiply',item);
+			post_request(x,y,'multiply',item, function(data){
+				document.getElementById("result").value = data;
+			});
 			document.getElementById("plusButton").className = "";			
 			document.getElementById("minusButton").className = "";
 			document.getElementById("multiplyButton").className = "pressed";	
@@ -170,7 +179,9 @@
 			var y = document.getElementById("y").value;
 //			var z = parseFloat(x) - parseFloat(y);
 			var item = x + "/" + y + "=" ;
-			post_request(x,y,'divide',item);
+			post_request(x,y,'divide',item, function(data){
+				document.getElementById("result").value = data;
+			});
 			document.getElementById("plusButton").className = "";			
 			document.getElementById("minusButton").className = "";
 			document.getElementById("multiplyButton").className = "";
