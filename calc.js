@@ -71,7 +71,7 @@
 					let obj = request.response;
 					f(obj);
 
-					document.getElementById("result").value = obj;
+	//				document.getElementById("result").value = obj;
 
 					console.log(obj);
 

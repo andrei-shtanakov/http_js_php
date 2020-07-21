@@ -20,6 +20,7 @@
 	<input type="text" id="result"/>
 	<div id="history"></div>
 
-	<script src="calc.js" type="text/javascript"></script>
+	<!-- <script src="calc.js" type="text/javascript"></script> -->
 </body>
+	<script src="calc.js" type="text/javascript"></script>
 </html>
